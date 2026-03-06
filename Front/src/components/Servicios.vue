@@ -26,7 +26,6 @@ interface ServicioForm {
 
 const BASE_URL = 'http://127.0.0.1:8000/api'
 
-// ── State ──────────────────────────────────────────────────────
 const servicios         = ref<Servicio[]>([])
 const categorias        = ref<Categoria[]>([])
 const cargando          = ref<boolean>(false)
@@ -38,7 +37,6 @@ const showDeleteModal   = ref<boolean>(false)
 const servicioAEliminar = ref<Servicio | null>(null)
 const selectedServicio  = ref<Servicio | null>(null)
 
-// ── Computed ───────────────────────────────────────────────────
 const serviciosFiltrados = computed<Servicio[]>(() => {
   if (!busqueda.value) return servicios.value
   const t = busqueda.value.toLowerCase()
@@ -49,17 +47,14 @@ const serviciosFiltrados = computed<Servicio[]>(() => {
   )
 })
 
-// ── Helpers ────────────────────────────────────────────────────
 function nombreCategoria(id: number): string {
   return categorias.value.find(c => c.id === id)?.nombre ?? '—'
 }
 
-// ── API: Cargar datos ─────────────────────────────────────────
 async function cargarDatos(): Promise<void> {
   cargando.value = true
   error.value = ''
   try {
-    // Carga servicios y categorías en paralelo
     const [resServicios, resCategorias] = await Promise.all([
       fetch(`${BASE_URL}/servicios`,  { headers: { 'Accept': 'application/json' } }),
       fetch(`${BASE_URL}/categorias`, { headers: { 'Accept': 'application/json' } }),
@@ -69,7 +64,6 @@ async function cargarDatos(): Promise<void> {
     const dataServicios  = await resServicios.json()
     const dataCategorias = await resCategorias.json()
 
-    // El backend devuelve categoria_id, mapeamos a categoriaId para el tipo Servicio
     servicios.value  = dataServicios.map((s: any) => ({
       ...s,
       categoriaId: s.categoria_id ?? s.categoriaId
@@ -82,7 +76,6 @@ async function cargarDatos(): Promise<void> {
   }
 }
 
-// ── API: Crear servicio ────────────────────────────────────────
 async function crearServicio(form: ServicioForm): Promise<void> {
   const res = await fetch(`${BASE_URL}/servicios`, {
     method: 'POST',
@@ -98,7 +91,6 @@ async function crearServicio(form: ServicioForm): Promise<void> {
   servicios.value.unshift(nuevo)
 }
 
-// ── Methods ────────────────────────────────────────────────────
 function openCrear(): void {
   modalAction.value = 'crear'
   selectedServicio.value = null
