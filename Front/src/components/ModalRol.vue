@@ -52,7 +52,6 @@ const inputStyle =
 
 <template>
   <Teleport to="body">
-    <!-- ── Modal Crear/Editar ── -->
     <Transition name="fade">
       <div
         v-if="show"
@@ -87,7 +86,6 @@ const inputStyle =
             font-family: 'Jost', sans-serif;
           "
         >
-          <!-- Header -->
           <div
             style="
               display: flex;
@@ -142,9 +140,7 @@ const inputStyle =
             </button>
           </div>
 
-          <!-- Campos -->
           <div style="display: flex; flex-direction: column; gap: 16px">
-            <!-- Nombre -->
             <div>
               <label
                 style="
@@ -170,7 +166,6 @@ const inputStyle =
               />
             </div>
 
-            <!-- Descripción -->
             <div>
               <label
                 style="
@@ -196,7 +191,6 @@ const inputStyle =
               ></textarea>
             </div>
 
-            <!-- Estado -->
             <div>
               <label
                 style="
@@ -273,7 +267,6 @@ const inputStyle =
             </div>
           </div>
 
-          <!-- Botones -->
           <div style="display: flex; gap: 10px; margin-top: 28px">
             <button
               @click="emit('close')"
@@ -315,7 +308,6 @@ const inputStyle =
       </div>
     </Transition>
 
-    <!-- ── Modal Eliminar ── -->
     <Transition name="fade">
       <div
         v-if="showDelete"
