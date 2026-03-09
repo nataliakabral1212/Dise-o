@@ -1,6 +1,5 @@
 <template>
   <div class="root-bg">
-    <!-- Fondo flores -->
     <div class="bg-flowers">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -47,21 +46,9 @@
       </svg>
     </div>
 
-    <!-- CARD -->
     <div class="card">
-      <!-- ══════════════════════════════════
-           ZONA IZQUIERDA (55%) — formulario cuando panel está a la izq
-           ZONA DERECHA  (55%) — formulario cuando panel está a la der
-           Usamos dos zonas fijas; mostramos la correcta según el modo
-      ══════════════════════════════════ -->
-
-      <!-- Zona izquierda del form (visible en LOGIN, panel a la izquierda tapa parte) -->
-      <!-- Zona derecha del form (visible en REGISTER, panel se fue a la derecha) -->
-
-      <!-- Contenedor que se "empuja" según dónde está el panel -->
       <div class="form-zone" :class="{ 'form-zone--right': isRegister }">
         <transition name="form-anim" mode="out-in">
-          <!-- LOGIN -->
           <div v-if="!isRegister" key="login" class="form-inner">
             <div class="logo-header">
               <div class="logo-wrap">
@@ -204,7 +191,7 @@
             </p>
           </div>
 
-          <!-- REGISTER -->
+  
           <div v-else key="register" class="form-inner">
             <div class="logo-header">
               <div class="logo-wrap" style="width: 70px; height: 70px">
@@ -369,12 +356,8 @@
         </transition>
       </div>
 
-      <!-- ══════════════════════════════════
-           PANEL DECORATIVO DESLIZANTE
-      ══════════════════════════════════ -->
       <div class="deco-track" :class="{ 'to-right': isRegister }">
         <div class="deco-panel">
-          <!-- Flores SVG -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 450 580"
@@ -534,7 +517,6 @@
             <circle cx="230" cy="330" r="7" fill="#F5EDE0" opacity="0.6" />
           </svg>
 
-          <!-- Texto del panel -->
           <transition name="panel-text" mode="out-in">
             <div v-if="!isRegister" key="txt-login" class="deco-text">
               <p class="deco-eyebrow">Salón de Belleza</p>
@@ -742,7 +724,6 @@ input::placeholder {
   }
 }
 
-/* ─── Root ─── */
 .root-bg {
   position: fixed;
   inset: 0;
@@ -759,7 +740,6 @@ input::placeholder {
   pointer-events: none;
 }
 
-/* ─── Card ─── */
 .card {
   position: relative;
   width: 900px;
@@ -774,13 +754,6 @@ input::placeholder {
   background: #fff;
 }
 
-/* ══════════════════════════════════════════════════════
-   FORM ZONE
-   La zona donde vive el formulario.
-   - En LOGIN:    ocupa el lado derecho (left: 45%, width: 55%)
-   - En REGISTER: ocupa el lado izquierdo (left: 0, width: 55%)
-   Se mueve CON LA MISMA DURACIÓN que el panel decorativo.
-══════════════════════════════════════════════════════ */
 .form-zone {
   position: absolute;
   top: 0;
@@ -796,7 +769,6 @@ input::placeholder {
   z-index: 1;
 }
 
-/* Modo register: el panel deco se fue a la derecha, el form ocupa la izquierda */
 .form-zone--right {
   left: 0;
 }
@@ -807,12 +779,6 @@ input::placeholder {
   padding: 0 24px;
 }
 
-/* ══════════════════════════════════════════════════════
-   PANEL DECORATIVO
-   - En LOGIN:    left: 0  (ocupa el 45% izquierdo)
-   - En REGISTER: left: 55% (ocupa el 45% derecho)
-   Transición idéntica a la del form-zone para que se muevan juntos.
-══════════════════════════════════════════════════════ */
 .deco-track {
   position: absolute;
   top: 0;
@@ -847,7 +813,6 @@ input::placeholder {
   height: 100%;
 }
 
-/* ─── Texto panel deco ─── */
 .deco-text {
   position: relative;
   z-index: 2;
@@ -896,7 +861,6 @@ input::placeholder {
   background: linear-gradient(to left, transparent, #d4a8b0);
 }
 
-/* ─── Logo ─── */
 .logo-header {
   display: flex;
   flex-direction: column;
@@ -932,7 +896,6 @@ input::placeholder {
   color: #c4a882;
 }
 
-/* ─── Campos ─── */
 .field-wrap {
   margin-bottom: 12px;
 }
@@ -979,7 +942,6 @@ input::placeholder {
   align-items: center;
 }
 
-/* ─── Misc ─── */
 .forgot-row {
   text-align: right;
   margin-bottom: 16px;
@@ -1013,7 +975,6 @@ input::placeholder {
   text-align: center;
 }
 
-/* ─── Botón ─── */
 .submit-btn {
   width: 100%;
   padding: 13px;
@@ -1040,7 +1001,6 @@ input::placeholder {
   transform: translateY(-1px);
 }
 
-/* ─── Transición formulario (se espera a que el panel termine de deslizar) ─── */
 .form-anim-enter-active {
   transition:
     opacity 0.32s ease 0.38s,
@@ -1068,7 +1028,6 @@ input::placeholder {
   transform: translateY(-6px) scale(0.97);
 }
 
-/* ─── Transición texto del panel ─── */
 .panel-text-enter-active {
   transition:
     opacity 0.3s ease 0.34s,
